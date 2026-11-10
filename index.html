@@ -96,7 +96,7 @@ h1{font-family:var(--display);font-weight:400;font-size:clamp(6.2rem,28vw,19rem)
 .player{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:var(--plum-2)}
 .player img{transition:transform .7s ease}
 .player:hover img{transform:scale(1.035)}
-.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player video{position:absolute;inset:0;width:100%;height:100%;background:#000}
 .play{position:absolute;inset:0;margin:auto;width:78px;height:78px;border-radius:50%;background:rgba(12,10,13,.55);box-shadow:inset 0 0 0 1.5px var(--gold);display:grid;place-items:center;transition:background-color .2s}
 .player:hover .play{background:rgba(12,10,13,.8)}
 .play svg{width:28px;height:28px;fill:var(--cream);margin-left:4px}
@@ -208,21 +208,21 @@ footer .fb{fill:#1877f2}
     </div>
     <div class="clips">
       <figure class="clip main">
-        <a class="player" data-id="HcGaTKpxsQ0" data-start="60" href="https://www.youtube.com/watch?v=HcGaTKpxsQ0&t=60s" aria-label="ניגון הקליפ הנך יפה רעייתי">
+        <a class="player" data-src="assets/video-hineh.mp4" href="https://www.youtube.com/watch?v=HcGaTKpxsQ0&t=60s" aria-label="ניגון הקליפ הנך יפה רעייתי">
           <img src="assets/clip-main.jpg" alt="שני שרה לצד החתן מתחת לחופה" loading="lazy">
           <span class="play"><svg aria-hidden="true"><use href="#play"/></svg></span>
         </a>
         <figcaption>הנך יפה רעייתי<span>כניסה לחופה, בעיבוד מיוחד עם כינור</span></figcaption>
       </figure>
       <figure class="clip">
-        <a class="player" data-id="JnHCYiQCDoY" data-start="0" href="https://www.youtube.com/watch?v=JnHCYiQCDoY" aria-label="ניגון הקליפ בואי בשלום">
+        <a class="player" data-src="assets/video-boi.mp4" href="https://www.youtube.com/watch?v=JnHCYiQCDoY" aria-label="ניגון הקליפ בואי בשלום">
           <img src="assets/clip-boi.jpg" alt="חתן וכלה נכנסים לחופה" loading="lazy">
           <span class="play"><svg aria-hidden="true"><use href="#play"/></svg></span>
         </a>
         <figcaption>בואי בשלום<span>הכנסת חתן וכלה</span></figcaption>
       </figure>
       <figure class="clip">
-        <a class="player" data-id="RsNiUcqc2gY" data-start="0" href="https://www.youtube.com/watch?v=RsNiUcqc2gY" aria-label="ניגון ההקלטה שמע ישראל ושיר למעלות">
+        <a class="player" data-src="assets/video-shema.mp4" href="https://www.youtube.com/watch?v=RsNiUcqc2gY" aria-label="ניגון ההקלטה שמע ישראל ושיר למעלות">
           <img src="assets/clip-rings.jpg" alt="טבעות נישואין" loading="lazy">
           <span class="play"><svg aria-hidden="true"><use href="#play"/></svg></span>
         </a>
@@ -322,7 +322,7 @@ footer .fb{fill:#1877f2}
       <p>השיר המקורי של שני, במילים שכתבה עם אברי דהן ובלחן שלה. הוא יצא ב-2014 והגיע לרדיו.</p>
     </div>
     <figure class="clip">
-      <a class="player" data-id="mOsOrHz3RfQ" data-start="0" href="https://www.youtube.com/watch?v=mOsOrHz3RfQ" aria-label="ניגון השיר ימים של אושר">
+      <a class="player" data-src="assets/video-single.mp4" href="https://www.youtube.com/watch?v=mOsOrHz3RfQ" aria-label="ניגון השיר ימים של אושר">
         <img src="assets/clip-single.jpg" alt="שני דהן, עטיפת הסינגל ימים של אושר" loading="lazy">
         <span class="play"><svg aria-hidden="true"><use href="#play"/></svg></span>
       </a>
@@ -353,12 +353,13 @@ footer .fb{fill:#1877f2}
 document.querySelectorAll('a.player').forEach(function(a){
   a.addEventListener('click',function(e){
     e.preventDefault();
-    var f=document.createElement('iframe');
-    f.src='https://www.youtube-nocookie.com/embed/'+a.dataset.id+'?autoplay=1&rel=0&playsinline=1&start='+(a.dataset.start||0);
-    f.title=a.getAttribute('aria-label');
-    f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
-    f.allowFullscreen=true;
-    var d=document.createElement('div');d.className='player';d.appendChild(f);a.replaceWith(d);
+    var v=document.createElement('video');
+    v.src=a.dataset.src;v.controls=true;v.playsInline=true;v.preload='auto';
+    v.poster=a.querySelector('img').getAttribute('src');
+    v.setAttribute('aria-label',a.getAttribute('aria-label'));
+    v.addEventListener('play',function(){document.querySelectorAll('.player video').forEach(function(o){if(o!==v)o.pause()})});
+    var d=document.createElement('div');d.className='player';d.appendChild(v);a.replaceWith(d);
+    v.play().catch(function(){});
   });
 });
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){
