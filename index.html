@@ -153,7 +153,12 @@ blockquote{font-family:var(--display);font-size:clamp(3.2rem,12vw,9rem);line-hei
 .final h2{font-size:clamp(3.8rem,15vw,12rem);line-height:.95}
 .final p{margin-top:1rem;color:var(--soft)}
 .final .actions{justify-content:center}
-footer{text-align:center;color:var(--soft);font-size:1rem;padding:0 var(--gutter) 110px}
+footer{display:flex;justify-content:center;gap:32px;color:var(--cream);font-size:1.05rem;padding:0 var(--gutter) 110px}
+footer a{display:inline-flex;align-items:center;gap:9px;min-height:44px;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer svg{width:28px;height:28px;flex:none}
+footer .yt{fill:#ff0033}
+footer .fb{fill:#1877f2}
 
 /* כפתור קבוע */
 .sticky{position:fixed;z-index:10;inset-inline:12px;bottom:calc(12px + env(safe-area-inset-bottom));box-shadow:0 10px 30px rgba(0,0,0,.55);transform:translateY(160%);transition:transform .3s ease;visibility:hidden}
@@ -166,6 +171,8 @@ footer{text-align:center;color:var(--soft);font-size:1rem;padding:0 var(--gutter
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 2.9 4.6 4 1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></symbol>
+  <symbol id="yt" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
+  <symbol id="fb" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></symbol>
   <symbol id="play" viewBox="0 0 24 24"><path d="M6 3.5v17a1 1 0 0 0 1.5.9l14-8.5a1 1 0 0 0 0-1.8l-14-8.5A1 1 0 0 0 6 3.5Z"/></symbol>
 </svg>
 
@@ -335,7 +342,10 @@ footer{text-align:center;color:var(--soft);font-size:1rem;padding:0 var(--gutter
 </section>
 </main>
 
-<footer><a href="https://www.youtube.com/@Shanidahan" rel="noopener" target="_blank">יוטיוב</a></footer>
+<footer>
+  <a href="https://www.youtube.com/@Shanidahan" rel="noopener" target="_blank"><svg class="yt" aria-hidden="true"><use href="#yt"/></svg>יוטיוב</a>
+  <a href="https://www.facebook.com/ShaniDahanOfficial" rel="noopener" target="_blank"><svg class="fb" aria-hidden="true"><use href="#fb"/></svg>פייסבוק</a>
+</footer>
 
 <a class="btn btn-wa sticky" id="sticky" href="https://wa.me/972506373904?text=%D7%94%D7%99%D7%99%20%D7%A9%D7%A0%D7%99%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%93%D7%A3%20%D7%A9%D7%9C%D7%9A.%20%D7%90%D7%A0%D7%97%D7%A0%D7%95%20%D7%9E%D7%AA%D7%97%D7%AA%D7%A0%D7%99%D7%9D%20%D7%91%D7%AA%D7%90%D7%A8%D7%99%D7%9A%20___%20%D7%91___.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%91%D7%93%D7%95%D7%A7%20%D7%90%D7%9D%20%D7%90%D7%AA%20%D7%A4%D7%A0%D7%95%D7%99%D7%94." tabindex="-1"><svg aria-hidden="true"><use href="#wa"/></svg>בדיקת תאריך בוואטסאפ</a>
 
